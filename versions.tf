@@ -13,10 +13,10 @@ terraform {
   required_version = ">= 0.15"
 
   backend "remote" {
-    organization = "<YOUR_TERRAFORM_ORG>"
+    organization = "al-cloudservice-test-tfc"
 
     workspaces {
-      name = "sentinel-example"
+      name = "hands-on"
     }
   }
 
