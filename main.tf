@@ -2,13 +2,19 @@ provider "aws" {
   region = var.region
 }
 
-data "aws_ssm_parameter" "amzn2_ami" {
-  name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
+data "aws_ami" "amzn2_ami" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm-2.0.20220426.0-x86_64-gp2"]
+  }
+
+  owners = ["137112412989"] # Canonical
 }
 
-
 resource "aws_instance" "amazonlinux2" {
-  ami                    = data.aws_ssm_parameter.amzn2_ami.id
+  ami                    = data.aws_ami.amzn2_ami.id
   instance_type          = var.instance_type
 
   tags = {
